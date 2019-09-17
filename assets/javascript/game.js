@@ -11,7 +11,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  var database = firebaseConfig.database();
+  var dataRef = firebaseConfig.database();
 
   var trainName = "";
   var trainDestination = "";
@@ -28,6 +28,16 @@
       $("#trainDestination").val("");
       $("#trainTime").val("");
       $("#trainFrequency").val("");
+    
+      dataRef.ref().push({
+          trainName:  trainName,
+          trainDestination: trainDestination,
+          trainTime: trainTime,
+          trainFrequency:  trainFrequency
 
-  })
+      });
+
+  });
+
+  
 
