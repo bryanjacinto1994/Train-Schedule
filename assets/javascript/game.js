@@ -39,5 +39,9 @@
 
   });
 
-  
+var time = function(){
+    var presentTime = moment.format("MMMM Do YYYY, hh:mm:ss a");
+    $("#presentTime").html(presentTime)
+}
+
 
