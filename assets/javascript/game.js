@@ -22,6 +22,12 @@
       trainName = $("#trainName").val().trim();
       trainDestination = $("#trainDestination").val().trim();
       trainTime = $("#trainTime").val().trim();
-      trainFrequency = $("#trainFrequency").val().trim();
+      trainFrequency = $("#trainFrequency").val().trim();screen
+
+      $("#trainName").val("");
+      $("#trainDestination").val("");
+      $("#trainTime").val("");
+      $("#trainFrequency").val("");
+
   })
 
