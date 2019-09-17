@@ -18,3 +18,10 @@
   var trainTime = "";
   var trainFrequency = "";
 
+  $("#add-train").on("click", function(){
+      trainName = $("#trainName").val().trim();
+      trainDestination = $("#trainDestination").val().trim();
+      trainTime = $("#trainTime").val().trim();
+      trainFrequency = $("#trainFrequency").val().trim();
+  })
+
