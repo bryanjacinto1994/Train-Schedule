@@ -46,6 +46,13 @@ function time(){
 setInterval(time, 1000);
 
 dataRef.ref().on("child_added", function(snapshot){
-    
+    var timeFreq = timeCompute(time, freq);
+    var momentTime = moment(time, "hh:mm");
+    var tr = $("<tr>");
+    var td = $("<td>");
+    var tdc = $("</td>")
+
+    tr.append(td + snapshot.val().trainName + tdc + td + trainDestination + tdc + td + momentTime.format("hh:mm a") + tdc + td + trainFrequency + " minutes" + tdc + td + timeFreq[0] + tdc + td + timeFreq[1] + " minutes" + tdc)
+    $("#table").append(tr);
 })
 
