@@ -54,5 +54,9 @@ dataRef.ref().on("child_added", function(snapshot){
 
     tr.append(td + snapshot.val().trainName + tdc + td + trainDestination + tdc + td + momentTime.format("hh:mm a") + tdc + td + trainFrequency + " minutes" + tdc + td + timeFreq[0] + tdc + td + timeFreq[1] + " minutes" + tdc)
     $("#table").append(tr);
-})
+},
+
+function(errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+});
 
