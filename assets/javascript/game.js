@@ -11,7 +11,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  var dataRef = firebaseConfig.database();
+  var dataRef = firebase.database();
 
   var trainName = "";
   var trainDestination = "";
@@ -40,7 +40,7 @@
   });
 
 function time(){
-    var presentTime = moment.format("MMMM Do YYYY, hh:mm:ss a");
+    var presentTime = moment().format("MMMM Do YYYY, hh:mm:ss a");
     $("#presentTime").html(presentTime)
 }
 setInterval(time, 1000);
@@ -59,4 +59,17 @@ dataRef.ref().on("child_added", function(snapshot){
 function(errorObject) {
     console.log("Errors handled: " + errorObject.code);
 });
+
+function timeCompute(trainTime, trainFrequency){
+    var tFrequency = trainFrequency;
+    var firstTime = trainTime;
+    var firstTimeConverted = moment(firstTime, "hh:mm");
+    var currentTime = moment();
+    var diffTime = currentTime.diff(firstTimeConverted, "minutes");
+    var tRemainder = diffTime % tFrequency;
+    var tMinutesTillTrain = tFrequency - tRemainder;
+    var nextTrain = currentTime.add(tMinutesTillTrain, "minutes");
+    var trainFormat = [nextTrain.format("hh:mm a"), tMinutesTillTrain];
+    return trainFormat; 
+}
 
