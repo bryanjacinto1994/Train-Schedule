@@ -38,7 +38,7 @@ The styling was used on a basic bootstrap configurations and with the use of opa
 
 ## Code Snippet
 
-HTML :
+HTML : This HTML Code Snippet shows the table formatting and where to input the user's submitted train schedule. The JavaScript code snippet below this shows the relationship of how the JS function will append to the HTML browser.
 ```html
 <div class="container">
         <div class="card bg-dark" style="color: white;">
@@ -67,6 +67,7 @@ HTML :
  
 ```
 JavaScript: 
+This JavasScript Code Snippet shows using the snapshot "child_added" function by making various variable names and assigning them to make it easier to input and append to the html browser. 
 
 ``` javascript
     dataRef.ref().on("child_added", function (snapshot) {
@@ -103,7 +104,7 @@ function timeCompute(time, freq) {
     return trainFormat;
 
 ```
-CSS:
+CSS: This CSS Code Snippet is a simple format styling for the html to make it look presentable. 
 ```css
 *{
     text-align:center;

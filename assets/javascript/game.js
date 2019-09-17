@@ -10,11 +10,11 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
+//Stored the firebase.database() function in a variable.
 var dataRef = firebase.database();
 
 
-
+//On click function that will pushed the information onto the firebase.
 $("#add-train").on("click", function () {
     var trainName = $("#trainName").val().trim();
     var trainDestination = $("#trainDestination").val().trim();
@@ -25,7 +25,7 @@ $("#add-train").on("click", function () {
     $("#trainDestination").val("");
     $("#trainTime").val("");
     $("#trainFrequency").val("");
-
+//This pushes the information to the firebase.
     dataRef.ref().push({
         trainName: trainName,
         trainDestination: trainDestination,
@@ -33,41 +33,38 @@ $("#add-train").on("click", function () {
         trainFrequency: trainFrequency
 
     });
-    return false;
+   
 
 
 });
 
-function time() {
-    var presentTime = moment().format("MMMM Do YYYY, hh:mm:ss a");
-    $("#presentTime").html(presentTime)
-}
-setInterval(time, 1000);
 
+//Creating new variables to make it easier to store data and append it onto the webpage with the use of snapshot via Firebase.
 dataRef.ref().on("child_added", function (snapshot) {
-    var timeFreq = timeCompute(trainTime, trainFrequency);
-    var minutesNext = timeFreq[0];
-    var minutesAway = timeFreq[1];
+    
     var tr = $("<tr>");
     var data = snapshot.val();
     var trainName = data.trainName;
     var trainDestination = data.trainDestination;
     var trainTime = data.trainTime;
     var trainFrequency = data.trainFrequency;
+    var timeFreq = timeCompute(trainTime, trainFrequency);
+    var minutesNext = timeFreq[0];
+    var minutesAway = timeFreq[1];
     
 
-
-    tr.append("<td>" + trainName + "</td>" + "<td>" + trainDestination + "</td>"  + "<td>" + trainFrequency + " minutes</td>" + "<td>" + minutesNext + "</td>" + "<td>");
+//This appends the variables on to the browser.
+    tr.append("<td>" + trainName + "</td>" + "<td>" + trainDestination + "</td>"  + "<td>" + trainFrequency + " minutes</td>" + "<td>" + minutesNext + "</td>");
     $("#tableBody").append(tr);
 },
-
+//Create a function the handles firebase errors.
     function (errorObject) {
         console.log("Errors handled: " + errorObject.code);
     });
-
-function timeCompute(time, freq) {
-    var tFrequency = time;
-    var firstTime = freq;
+//This function calculates the time for the train schedule.
+function timeCompute(trainTime, trainFrequency) {
+    var tFrequency = trainTime;
+    var firstTime = trainFrequency;
     var firstTimeConverted = moment(firstTime, "hh:mm");
     var currentTime = moment();
     var diffTime = currentTime.diff(firstTimeConverted, "minutes");
@@ -78,3 +75,9 @@ function timeCompute(time, freq) {
     return trainFormat;
 }
 
+//This function will show the current time displayed on the screen without the need to refresh the page.
+function time() {
+    var presentTime = moment().format("MMMM Do YYYY, hh:mm:ss a");
+    $("#presentTime").html(presentTime)
+}
+setInterval(time, 1000);
