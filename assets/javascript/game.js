@@ -45,3 +45,7 @@ function time(){
 }
 setInterval(time, 1000);
 
+dataRef.ref().on("child_added", function(snapshot){
+    
+})
+
