@@ -3,21 +3,16 @@
     font-family: 'Emblema One', cursive;
 }
 
-#train{
-        width: 1920px;
-        height:500px;
-        position: relative;
-        opacity: 0.5;
+.jumbotron{
+    height: 300px;
     
 }
 
-header{
-    font-size: 50px;
+.card{
     color: black;
+}
+
+#Train-Schedule{
     position: relative;
-    bottom: 300px;
-    background-color: darkgray;
-    border-radius: 30px;
-    opacity: 0.8;
-    
+    bottom: 28px;
 }
