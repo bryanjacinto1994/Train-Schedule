@@ -13,4 +13,8 @@
 
   var database = firebaseConfig.database();
 
-  
+  var trainName = "";
+  var trainDestination = "";
+  var trainTime = "";
+  var trainFrequency = "";
+
