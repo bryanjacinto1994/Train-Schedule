@@ -39,9 +39,9 @@
 
   });
 
-var time = function(){
+function time(){
     var presentTime = moment.format("MMMM Do YYYY, hh:mm:ss a");
     $("#presentTime").html(presentTime)
 }
-
+setInterval(time, 1000);
 
