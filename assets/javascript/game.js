@@ -1,5 +1,5 @@
- // Your web app's Firebase configuration
- var firebaseConfig = {
+// Your web app's Firebase configuration
+var firebaseConfig = {
     apiKey: "AIzaSyA7juTh--pff_nL0Wg4_i85BOuuvVIRvQE",
     authDomain: "train-schedule-1dc12.firebaseapp.com",
     databaseURL: "https://train-schedule-1dc12.firebaseio.com",
@@ -7,62 +7,67 @@
     storageBucket: "",
     messagingSenderId: "257312302570",
     appId: "1:257312302570:web:ee6680341d2f553cb0fe93"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-  var dataRef = firebase.database();
+var dataRef = firebase.database();
 
-  var trainName = "";
-  var trainDestination = "";
-  var trainTime = "";
-  var trainFrequency = "";
 
-  $("#add-train").on("click", function(){
-      trainName = $("#trainName").val().trim();
-      trainDestination = $("#trainDestination").val().trim();
-      trainTime = $("#trainTime").val().trim();
-      trainFrequency = $("#trainFrequency").val().trim();screen
 
-      $("#trainName").val("");
-      $("#trainDestination").val("");
-      $("#trainTime").val("");
-      $("#trainFrequency").val("");
-    
-      dataRef.ref().push({
-          trainName:  trainName,
-          trainDestination: trainDestination,
-          trainTime: trainTime,
-          trainFrequency:  trainFrequency
+$("#add-train").on("click", function () {
+    var trainName = $("#trainName").val().trim();
+    var trainDestination = $("#trainDestination").val().trim();
+    var trainTime = $("#trainTime").val().trim();
+    var trainFrequency = $("#trainFrequency").val().trim(); 
 
-      });
+    $("#trainName").val("");
+    $("#trainDestination").val("");
+    $("#trainTime").val("");
+    $("#trainFrequency").val("");
 
-  });
+    dataRef.ref().push({
+        trainName: trainName,
+        trainDestination: trainDestination,
+        trainTime: trainTime,
+        trainFrequency: trainFrequency
 
-function time(){
+    });
+    return false;
+
+
+});
+
+function time() {
     var presentTime = moment().format("MMMM Do YYYY, hh:mm:ss a");
     $("#presentTime").html(presentTime)
 }
 setInterval(time, 1000);
 
-dataRef.ref().on("child_added", function(snapshot){
-    var timeFreq = timeCompute(time, freq);
-    var momentTime = moment(time, "hh:mm");
+dataRef.ref().on("child_added", function (snapshot) {
+    var timeFreq = timeCompute(trainTime, trainFrequency);
+    var minutesNext = timeFreq[0];
+    var minutesAway = timeFreq[1];
     var tr = $("<tr>");
-    var td = $("<td>");
-    var tdc = $("</td>")
+    var data = snapshot.val();
+    var trainName = data.trainName;
+    var trainDestination = data.trainDestination;
+    var trainTime = data.trainTime;
+    var trainFrequency = data.trainFrequency;
+    
 
-    tr.append(td + snapshot.val().trainName + tdc + td + trainDestination + tdc + td + momentTime.format("hh:mm a") + tdc + td + trainFrequency + " minutes" + tdc + td + timeFreq[0] + tdc + td + timeFreq[1] + " minutes" + tdc)
-    $("#table").append(tr);
+
+    tr.append("<td>" + trainName + "</td>" + "<td>" + trainDestination + "</td>"  + "<td>" + trainFrequency + " minutes</td>" + "<td>" + minutesNext + "</td>" + "<td>");
+    $("#tableBody").append(tr);
 },
 
-function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
-});
+    function (errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
 
-function timeCompute(trainTime, trainFrequency){
-    var tFrequency = trainFrequency;
-    var firstTime = trainTime;
+function timeCompute(time, freq) {
+    var tFrequency = time;
+    var firstTime = freq;
     var firstTimeConverted = moment(firstTime, "hh:mm");
     var currentTime = moment();
     var diffTime = currentTime.diff(firstTimeConverted, "minutes");
@@ -70,6 +75,6 @@ function timeCompute(trainTime, trainFrequency){
     var tMinutesTillTrain = tFrequency - tRemainder;
     var nextTrain = currentTime.add(tMinutesTillTrain, "minutes");
     var trainFormat = [nextTrain.format("hh:mm a"), tMinutesTillTrain];
-    return trainFormat; 
+    return trainFormat;
 }
 

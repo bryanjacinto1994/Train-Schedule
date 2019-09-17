@@ -16,7 +16,6 @@
 
 <body>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <!-- <img src="assets/images/train.jpg" alt="Train" id="train"> -->
     <div class="jumbotron jumbotron-fluid bg-dark" style="border-radius: 100px;">
         <div class="container">
             <div class="panel-body text-center">
@@ -34,15 +33,17 @@
             <div class="card-body">
                 <blockquote class="blockquote mb-0">
                     <table style="width: 100%">
+                        <thead>
                         <tr>
                             <th>Train Name</th>
                             <th>Destination</th>
                             <th>Frequency (min)</th>
                             <th>Next Arrival</th>
-                            <th>Minutes Away</th>
+                            
                         </tr>
+                        </thead>
                         <hr>
-
+                        <tbody id="tableBody"></tbody>
                          </table>
                 </blockquote>
             </div>
@@ -57,20 +58,20 @@
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="input-name">Train Name</label>
-                        <input type="text" class="form-control" id="input-name" aria-describedby="emailHelp">
+                        <label for="trainName">Train Name</label>
+                        <input type="text" class="form-control" id="trainName" aria-describedby="emailHelp">
 
-                        <label for="input-role">Destination</label>
-                        <input type="text" class="form-control" id="input-role" aria-describedby="emailHelp">
+                        <label for="trainDestination">Destination</label>
+                        <input type="text" class="form-control" id="trainDestination" aria-describedby="emailHelp">
 
-                        <label for="input-start">First Train Time (HH:mm - Military Time)</label>
-                        <input type="text" class="form-control" id="input-start" aria-describedby="emailHelp">
+                        <label for="trainTime">First Train Time (HH:mm - Military Time)</label>
+                        <input type="text" class="form-control" id="trainTime" aria-describedby="emailHelp">
 
-                        <label for="input-rate">Frequency (min)</label>
-                        <input type="text" class="form-control" id="input-rate" aria-describedby="emailHelp">
+                        <label for="trainFrequency">Frequency (min)</label>
+                        <input type="text" class="form-control" id="trainFrequency" aria-describedby="emailHelp">
                     </div>
 
-                    <button type="submit" id="add-user" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="add-train" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
@@ -81,7 +82,7 @@
 
 
 
-    <div class="bottom bg-dark" style="text-align: center; color: white;">
+    <div class="fixed-bottom bg-dark" style="text-align: center; color: white;">
         | Bryan Jacinto © |
     </div>
 
